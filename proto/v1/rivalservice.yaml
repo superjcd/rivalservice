@@ -1,0 +1,22 @@
+type: google.api.Service
+config_version: 3
+
+
+http:
+  rules:
+    - selector: proto.v1.RivalService.CreateRival
+      post: /v1/rivals
+    - selector: proto.v1.RivalService.ListRival
+      get: /v1/rivals
+    - selector: proto.v1.RivalService.DeleteRival
+      delete: /v1/rivals
+    - selector: proto.v1.RivalService.AppendRivalChanges
+      post: /v1/rivals/changes
+    - selector: proto.v1.RivalService.ListRivalChanges
+      list: /v1/rivals/changes
+    - selector: proto.v1.RivalService.AppendRivalProductInactiveDetail
+      post: /v1/rivals/details/inactive
+    - selector: proto.v1.RivalService.AppendRivalProductActiveDetail
+      post: /v1/rivals/details/active
+  
+

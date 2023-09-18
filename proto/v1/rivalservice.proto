@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+package proto.v1;
+
+option go_package = "github.com/HooYa-Bigdata/rivalservice/genproto/v1";
+
+
+service RivalService {
+    rpc CreateRival(CreateRivalRequest) returns (CreateRivalResponse);  
+    rpc ListRival(ListRivalRequest) returns (ListRivalResponse); 
+    rpc DeleteRival(DeleteRivalRequest) returns (DeleteRivalResponse); 
+     
+    rpc AppendRivalChanges(AppendRivalChangesRequest) returns (AppendRivalChangesResponse);  
+    rpc ListRivalChanges(ListRivalChangesRequest) returns (ListRivalChangesResponse){};
+    rpc DeleteRivalChanges(DeleteRivalChangesRequest) returns (DeleteRivalChangesResponse) {};
+
+    rpc AppendRivalProductInactiveDetail(AppendRivalProductInactiveDetailRequest) returns (AppendRivalProductInactiveDetailResponse){};
+    rpc DeleteRivalInactiveDetail(DeleteRivalInactiveDetailRequest) returns (DeleteRivalInactiveDetailResponse) {};
+    rpc AppendRivalProductActiveDetail(AppendRivalProductActiveDetailRequest) returns (AppendRivalProductActiveDetailResponse){};   
+    rpc DeleteRivalActiveDetail(DeleteRivalActiveDetailRequest) returns (DeleteRivalActiveDetailResponse) {};
+}
+
+enum Status {
+    success = 0;
+    failure = 1;
+}
+
+message AmzProductInactivateDetail{
+    string asin=1;
+    string country=2;
+    string title=3;
+    string bullet_points=4; 
+    string create_date=5;
+}
+
+message AmzProductActiveDetail { 
+    string asin =1;
+    string country=2; 
+    string price = 3; 
+    string coupon = 4;
+    string currency=5;
+    string star=6;
+    uint32 ratings=7;
+    string image=8;
+    string parent_asin=9;
+    string category_info = 10;  
+    string top_category_name=11;
+    uint32 top_category_rank=12;
+    string color=13;
+    string weight=14;
+    string weight_unit=15;
+    string dimensions=16;
+    string dimensions_unit=17;
+    string create_date=18;
+}
+
+
+// {user: {asin_country: <set>}}
+message CreateRivalRequest {
+    string user =1;
+    string asin =2;
+    string country=3;
+    repeated string rivals = 4;
+}
+
+message CreateRivalResponse {
+    string msg = 1;
+    Status status =2;
+}
+
+// 为某个产品获取所有竞品， 没有的话就是某个用户的所有竞品
+message ListRivalRequest {
+    string user =1;
+    string country=2;
+    string asin =3;   
+    int32 offset=4;
+    int32 limit=5;
+
+}
+
+message Rival {
+    string user =1;
+    string country=2;
+    string asin =3;
+    string rival_asin = 4; 
+}
+
+message ListRivalResponse {
+    string msg = 1; 
+    Status status =2;
+    repeated Rival rivals =3 ;
+}
+
+
+message DeleteRivalRequest {
+    string user =1;
+    string asin =2;
+    string country=3;        
+    repeated string rivals=4;
+}
+
+message DeleteRivalResponse {
+    string msg = 1; 
+    Status status =2;
+}
+
+
+message AppendRivalChangesRequest {
+    string old_date=1;
+    string new_date=2;
+}
+
+message AppendRivalChangesResponse {
+    string msg = 1; 
+    Status status =2;
+}
+
+
+message ListRivalChangesRequest {
+    string user=1;
+    string country=2;
+    string create_date=3;
+    int32 offset=4;
+    int32 limit=5;
+}
+
+message RivalChange {
+    string my_asin=1;
+    string rival_asin=2;
+    string country=3;
+    string field  =4 ;
+    string old_value=5;
+    string new_value=6;
+
+}
+
+message ListRivalChangesResponse {
+    string msg=1;
+    Status status =2;        
+    repeated RivalChange rival_changes=3;
+}
+
+
+
+message AppendRivalProductInactiveDetailRequest {
+    string asin=1;
+    string country=2;
+    string title=3;
+    string bullet_points=4; 
+    string create_date=5;
+
+}
+
+message AppendRivalProductInactiveDetailResponse {
+    string msg=1;
+    Status status =2;       
+}
+
+message AppendRivalProductActiveDetailRequest {
+    AmzProductActiveDetail details=1;
+}
+
+message AppendRivalProductActiveDetailResponse {
+    string msg=1;
+    Status status =2;  
+}
+
+
+message DeleteRivalChangesRequest {
+    string min_create_date=1;
+}
+
+message DeleteRivalChangesResponse {
+    string msg=1;
+    Status status =2;    
+}
+
+message DeleteRivalInactiveDetailRequest {
+    string min_create_date=1;
+}
+
+message DeleteRivalInactiveDetailResponse {
+    string msg=1;
+    Status status =2;       
+}
+
+
+message DeleteRivalActiveDetailRequest {
+    string min_create_date=1;
+}
+
+message DeleteRivalActiveDetailResponse {
+    string msg=1;
+    Status status =2;       
+}
