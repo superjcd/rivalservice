@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
-	"github.com/HooYa-Bigdata/rivalservice/service/sql_store"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
+	"github.com/superjcd/rivalservice/service/sql_store"
 	"gorm.io/gorm"
 )
 

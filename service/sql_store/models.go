@@ -1,7 +1,7 @@
 package sql_store
 
 import (
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
 	"gorm.io/gorm"
 )
 
@@ -60,7 +60,7 @@ type UserRivalChange struct {
 }
 
 type UserRivalChangeList struct {
-	TotalCount int                `json:"totalCount"`
+	TotalCount int               `json:"totalCount"`
 	Items      []UserRivalChange `json:"items"`
 }
 

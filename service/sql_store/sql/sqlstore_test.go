@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
-	"github.com/HooYa-Bigdata/rivalservice/service/sql_store"
 	"github.com/glebarez/sqlite"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
+	"github.com/superjcd/rivalservice/service/sql_store"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )

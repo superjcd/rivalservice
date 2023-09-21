@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	"github.com/HooYa-Bigdata/rivalservice/config"
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
-	"github.com/HooYa-Bigdata/rivalservice/pkg/database"
-	"github.com/HooYa-Bigdata/rivalservice/service/sql_store"
-	"github.com/HooYa-Bigdata/rivalservice/service/sql_store/sql"
+	"github.com/superjcd/rivalservice/config"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
+	"github.com/superjcd/rivalservice/pkg/database"
+	"github.com/superjcd/rivalservice/service/sql_store"
+	"github.com/superjcd/rivalservice/service/sql_store/sql"
 
 	"gorm.io/gorm"
 )

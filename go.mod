@@ -1,4 +1,4 @@
-module github.com/HooYa-Bigdata/rivalservice
+module github.com/superjcd/rivalservice
 
 go 1.20
 

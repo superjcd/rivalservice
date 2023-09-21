@@ -6,9 +6,9 @@ package server
 import (
 	"github.com/google/wire"
 
-	"github.com/HooYa-Bigdata/rivalservice/config"
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
-	"github.com/HooYa-Bigdata/rivalservice/service"
+	"github.com/superjcd/rivalservice/config"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
+	"github.com/superjcd/rivalservice/service"
 )
 
 // InitServer Inject service's component

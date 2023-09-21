@@ -7,9 +7,9 @@
 package server
 
 import (
-	"github.com/HooYa-Bigdata/rivalservice/config"
-	"github.com/HooYa-Bigdata/rivalservice/genproto/v1"
-	"github.com/HooYa-Bigdata/rivalservice/service"
+	"github.com/superjcd/rivalservice/config"
+	"github.com/superjcd/rivalservice/genproto/v1"
+	"github.com/superjcd/rivalservice/service"
 )
 
 // Injectors from wire.go:

@@ -3,7 +3,7 @@ package sql_store
 import (
 	"context"
 
-	v1 "github.com/HooYa-Bigdata/rivalservice/genproto/v1"
+	v1 "github.com/superjcd/rivalservice/genproto/v1"
 )
 
 type SqlFactory interface {
