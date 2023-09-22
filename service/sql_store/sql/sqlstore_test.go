@@ -86,27 +86,32 @@ func (suite *FakeStoreTestSuite) TestListRival() {
 func (suite *FakeStoreTestSuite) TestAppendDetail() {
 	// 导入active
 	rq := &v1.AppendRivalProductActiveDetailRequest{
-		Details: &v1.AmzProductActiveDetail{
-			Asin:       "B1001",
-			Country:    "US",
-			Price:      "100",
-			CreateDate: "2022-01-01",
+		Details: []*v1.AmzProductActiveDetail{
+			{
+				Asin:       "B1001",
+				Country:    "US",
+				Price:      "100",
+				CreateDate: "2022-01-01",
+			},
 		},
 	}
 
 	err := suite.FakeFactory.ProductDetails().AppendActiveDetail(context.Background(), rq)
 	assert.Nil(suite.T(), err)
 
-	rq2 := &v1.AppendRivalProductActiveDetailRequest{
-		Details: &v1.AmzProductActiveDetail{
-			Asin:       "B1001",
-			Country:    "US",
-			Price:      "101",
-			CreateDate: "2022-01-02",
+	rq2 := &v1.AppendRivalProductInactiveDetailRequest{
+		Details: []*v1.AmzProductInactivateDetail{
+			{
+				Asin:         "B1001",
+				Country:      "US",
+				Title:        "Iphone 15",
+				BulletPoints: "1 good 2 cheap",
+				CreateDate:   "2022-01-01",
+			},
 		},
 	}
 
-	err2 := suite.FakeFactory.ProductDetails().AppendActiveDetail(context.Background(), rq2)
+	err2 := suite.FakeFactory.ProductDetails().AppendInactiveDetail(context.Background(), rq2)
 	assert.Nil(suite.T(), err2)
 
 }
@@ -115,6 +120,7 @@ func (suite *FakeStoreTestSuite) TestAppendRivalChanges() {
 	rq := &v1.AppendRivalChangesRequest{
 		OldDate: "2022-01-01",
 		NewDate: "2022-01-02",
+		Field:   "price",
 	}
 
 	err := suite.FakeFactory.RivalChanges().Append(context.Background(), rq)
@@ -126,6 +132,7 @@ func (suite *FakeStoreTestSuite) TestListUserRivalChanges() {
 		User:       "Jack",
 		Country:    "US",
 		CreateDate: "2022-01-02",
+		Field:      "price",
 		Offset:     0,
 		Limit:      10,
 	}

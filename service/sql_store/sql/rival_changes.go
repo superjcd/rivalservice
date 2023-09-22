@@ -17,38 +17,47 @@ var _ sql_store.RivalChangeStore = (*rival_changes)(nil)
 
 func (rc *rival_changes) Append(ctx context.Context, rq *v1.AppendRivalChangesRequest) error {
 	rivalChanges := make([]sql_store.RivalChange, 0, 512)
-
-	rc.db.Raw(`SELECT
+	sql := fmt.Sprintf(`
+	        SELECT
 				t1.country country,
 				t1.asin asin,
-				'price' as field,
+				'%s' as field,
 				t1.price as old_value,
 				t2.price as new_value,
-				? as create_date
+				'%s' as create_date
 			FROM
 			(
 			Select
 				country,
 				asin,
-				price
+				%s
 			FROM rival_produt_active_details
-			WHERE create_date = ?
-				and price != ''
+			WHERE create_date = '%s'
+				and %s != ''
 			)t1 LEFT JOIN
 			(
 				Select
 				country,
 				asin,
-				price
+				%s
 			FROM rival_produt_active_details
-			WHERE create_date = ?
-				and price != ''
+			WHERE create_date = '%s'
+				and %s != ''
 			)t2
 			on t1.asin = t2.asin
 			and t1.country = t2.country
-			where t1.price != t2.price`, rq.NewDate, rq.OldDate, rq.NewDate).Scan(&rivalChanges)
+			where t1.price != t2.price
+		`, rq.Field, rq.NewDate, rq.Field, rq.OldDate, rq.Field, rq.Field, rq.NewDate, rq.Field)
 
-	return rc.db.Create(rivalChanges).Error
+	d := rc.db.Raw(sql).Scan(&rivalChanges)
+	if d.Error != nil {
+		return d.Error
+	}
+	if len(rivalChanges) > 0 {
+		return rc.db.Create(&rivalChanges).Error
+	}
+
+	return nil
 
 }
 
@@ -84,10 +93,12 @@ func (rc *rival_changes) List(ctx context.Context, rq *v1.ListRivalChangesReques
 		  FROM rival_changes
 		  WHERE  country = '%s'		
 			AND create_date = '%s'
+			AND field = '%s'
 		) t2 ON t1.rival_asin = t2.asin 
 		  AND t1.country = t2.country	
+		
 	`
-	sql = fmt.Sprintf(sql, rq.User, rq.Country, rq.Country, rq.CreateDate)
+	sql = fmt.Sprintf(sql, rq.User, rq.Country, rq.Country, rq.CreateDate, rq.Field)
 
 	rc.db.Raw(sql).Scan(&userChanges)
 
@@ -100,7 +111,7 @@ func (rc *rival_changes) List(ctx context.Context, rq *v1.ListRivalChangesReques
 
 func (rc *rival_changes) Delete(ctx context.Context, rq *v1.DeleteRivalChangesRequest) error {
 	if rq.MinCreateDate != "" {
-		return rc.db.Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalChange{}).Error
+		return rc.db.Unscoped().Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalChange{}).Error
 	}
 
 	return fmt.Errorf("min_create_date不可谓空字段")

@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	RivalService_CreateRival_FullMethodName                      = "/proto.v1.RivalService/CreateRival"
-	RivalService_ListRival_FullMethodName                        = "/proto.v1.RivalService/ListRival"
-	RivalService_DeleteRival_FullMethodName                      = "/proto.v1.RivalService/DeleteRival"
-	RivalService_AppendRivalChanges_FullMethodName               = "/proto.v1.RivalService/AppendRivalChanges"
-	RivalService_ListRivalChanges_FullMethodName                 = "/proto.v1.RivalService/ListRivalChanges"
-	RivalService_DeleteRivalChanges_FullMethodName               = "/proto.v1.RivalService/DeleteRivalChanges"
-	RivalService_AppendRivalProductInactiveDetail_FullMethodName = "/proto.v1.RivalService/AppendRivalProductInactiveDetail"
-	RivalService_DeleteRivalInactiveDetail_FullMethodName        = "/proto.v1.RivalService/DeleteRivalInactiveDetail"
-	RivalService_AppendRivalProductActiveDetail_FullMethodName   = "/proto.v1.RivalService/AppendRivalProductActiveDetail"
-	RivalService_DeleteRivalActiveDetail_FullMethodName          = "/proto.v1.RivalService/DeleteRivalActiveDetail"
+	RivalService_CreateRival_FullMethodName                      = "/superjcd.rivalservice.v1.RivalService/CreateRival"
+	RivalService_ListRival_FullMethodName                        = "/superjcd.rivalservice.v1.RivalService/ListRival"
+	RivalService_DeleteRival_FullMethodName                      = "/superjcd.rivalservice.v1.RivalService/DeleteRival"
+	RivalService_AppendRivalChanges_FullMethodName               = "/superjcd.rivalservice.v1.RivalService/AppendRivalChanges"
+	RivalService_ListRivalChanges_FullMethodName                 = "/superjcd.rivalservice.v1.RivalService/ListRivalChanges"
+	RivalService_DeleteRivalChanges_FullMethodName               = "/superjcd.rivalservice.v1.RivalService/DeleteRivalChanges"
+	RivalService_AppendRivalProductInactiveDetail_FullMethodName = "/superjcd.rivalservice.v1.RivalService/AppendRivalProductInactiveDetail"
+	RivalService_DeleteRivalInactiveDetail_FullMethodName        = "/superjcd.rivalservice.v1.RivalService/DeleteRivalInactiveDetail"
+	RivalService_AppendRivalProductActiveDetail_FullMethodName   = "/superjcd.rivalservice.v1.RivalService/AppendRivalProductActiveDetail"
+	RivalService_DeleteRivalActiveDetail_FullMethodName          = "/superjcd.rivalservice.v1.RivalService/DeleteRivalActiveDetail"
 )
 
 // RivalServiceClient is the client API for RivalService service.
@@ -393,7 +393,7 @@ func _RivalService_DeleteRivalActiveDetail_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RivalService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.v1.RivalService",
+	ServiceName: "superjcd.rivalservice.v1.RivalService",
 	HandlerType: (*RivalServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

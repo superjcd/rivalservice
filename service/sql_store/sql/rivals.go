@@ -76,6 +76,6 @@ func (ur *rivals) Delete(ctx context.Context, rq *v1.DeleteRivalRequest) error {
 		tx = tx.Where("asin = ?", rq.Asin)
 	}
 
-	return tx.Delete(&sql_store.Rival{}).Error
+	return tx.Unscoped().Delete(&sql_store.Rival{}).Error
 
 }

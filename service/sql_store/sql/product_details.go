@@ -16,52 +16,63 @@ type product_details struct {
 var _ sql_store.ProductDetailsStore = (*product_details)(nil)
 
 func (pd *product_details) AppendActiveDetail(ctx context.Context, rq *v1.AppendRivalProductActiveDetailRequest) error {
-	active_info := sql_store.RivalProdutActiveDetail{
-		Asin:            rq.Details.Asin,
-		Country:         rq.Details.Country,
-		Price:           rq.Details.Price,
-		Currency:        rq.Details.Currency,
-		Coupon:          rq.Details.Coupon,
-		Star:            rq.Details.Star,
-		Ratings:         rq.Details.Ratings,
-		Image:           rq.Details.Image,
-		ParentAsin:      rq.Details.ParentAsin,
-		CategoryInfo:    rq.Details.CategoryInfo,
-		TopCategoryName: rq.Details.TopCategoryName,
-		TopCategoryRank: rq.Details.TopCategoryRank,
-		Color:           rq.Details.Color,
-		Weight:          rq.Details.Weight,
-		WeightUnit:      rq.Details.WeightUnit,
-		Dimensions:      rq.Details.Dimensions,
-		DimensionsUnit:  rq.Details.DimensionsUnit,
-		CreateDate:      rq.Details.CreateDate,
+	activeInfos := make([]sql_store.RivalProdutActiveDetail, 0, 16)
+
+	for _, d := range rq.Details {
+		activeInfo := sql_store.RivalProdutActiveDetail{
+			Asin:            d.Asin,
+			Country:         d.Country,
+			Price:           d.Price,
+			Currency:        d.Currency,
+			Coupon:          d.Coupon,
+			Star:            d.Star,
+			Ratings:         d.Ratings,
+			Image:           d.Image,
+			ParentAsin:      d.ParentAsin,
+			CategoryInfo:    d.CategoryInfo,
+			TopCategoryName: d.TopCategoryName,
+			TopCategoryRank: d.TopCategoryRank,
+			Color:           d.Color,
+			Weight:          d.Weight,
+			WeightUnit:      d.WeightUnit,
+			Dimensions:      d.Dimensions,
+			DimensionsUnit:  d.DimensionsUnit,
+			CreateDate:      d.CreateDate,
+		}
+		activeInfos = append(activeInfos, activeInfo)
 	}
 
-	return pd.db.Create(&active_info).Error
+	return pd.db.Create(&activeInfos).Error
 }
 
 func (pd *product_details) DeleteActiveDetail(ctx context.Context, rq *v1.DeleteRivalActiveDetailRequest) error {
 	if rq.MinCreateDate != "" {
-		return pd.db.Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalProdutActiveDetail{}).Error
+		return pd.db.Unscoped().Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalProdutActiveDetail{}).Error
 	}
 	return fmt.Errorf("min create date参数不可以为空")
 }
 
 func (pd *product_details) AppendInactiveDetail(ctx context.Context, rq *v1.AppendRivalProductInactiveDetailRequest) error {
-	inactive_info := sql_store.RivalProdutInactiveDetail{
-		Asin:         rq.Asin,
-		Country:      rq.Country,
-		Title:        rq.Title,
-		BulletPoints: rq.BulletPoints,
-		CreateDate:   rq.CreateDate,
+	inactiveInfos := make([]sql_store.RivalProdutInactiveDetail, 0, 16)
+
+	for _, d := range rq.Details {
+		inactiveInfo := sql_store.RivalProdutInactiveDetail{
+			Asin:         d.Asin,
+			Country:      d.Country,
+			Title:        d.Title,
+			BulletPoints: d.BulletPoints,
+			CreateDate:   d.CreateDate,
+		}
+
+		inactiveInfos = append(inactiveInfos, inactiveInfo)
 	}
 
-	return pd.db.Create(&inactive_info).Error
+	return pd.db.Create(&inactiveInfos).Error
 }
 
 func (pd *product_details) DeleteInactiveDetail(ctx context.Context, rq *v1.DeleteRivalInactiveDetailRequest) error {
 	if rq.MinCreateDate != "" {
-		return pd.db.Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalProdutInactiveDetail{}).Error
+		return pd.db.Unscoped().Where("create_date < ?", rq.MinCreateDate).Delete(&sql_store.RivalProdutInactiveDetail{}).Error
 	}
 	return fmt.Errorf("min create date参数不可以为空")
 }

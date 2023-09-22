@@ -13,9 +13,9 @@ import (
 	"io"
 	"net/http"
 
-	extV1 "github.com/superjcd/rivalservice/genproto/v1"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
+	extV1 "github.com/superjcd/rivalservice/genproto/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
@@ -262,7 +262,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/CreateRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/CreateRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -287,7 +287,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/ListRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/ListRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -312,7 +312,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/DeleteRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/DeleteRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -337,7 +337,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalChanges", runtime.WithHTTPPathPattern("/v1/rivals/changes"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalChanges", runtime.WithHTTPPathPattern("/v1/rivals/changes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -362,7 +362,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalProductInactiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/inactive"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalProductInactiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/inactive"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -387,7 +387,7 @@ func RegisterRivalServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalProductActiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/active"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalProductActiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/active"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -451,7 +451,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/CreateRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/CreateRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -473,7 +473,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/ListRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/ListRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -495,7 +495,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/DeleteRival", runtime.WithHTTPPathPattern("/v1/rivals"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/DeleteRival", runtime.WithHTTPPathPattern("/v1/rivals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -517,7 +517,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalChanges", runtime.WithHTTPPathPattern("/v1/rivals/changes"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalChanges", runtime.WithHTTPPathPattern("/v1/rivals/changes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -539,7 +539,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalProductInactiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/inactive"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalProductInactiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/inactive"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -561,7 +561,7 @@ func RegisterRivalServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.v1.RivalService/AppendRivalProductActiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/active"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/superjcd.rivalservice.v1.RivalService/AppendRivalProductActiveDetail", runtime.WithHTTPPathPattern("/v1/rivals/details/active"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
