@@ -2,6 +2,8 @@ package sql
 
 import (
 	"context"
+	"fmt"
+	"strings"
 
 	v1 "github.com/superjcd/rivalservice/genproto/v1"
 	"github.com/superjcd/rivalservice/service/sql_store"
@@ -74,6 +76,16 @@ func (ur *rivals) Delete(ctx context.Context, rq *v1.DeleteRivalRequest) error {
 
 	if rq.Asin != "" {
 		tx = tx.Where("asin = ?", rq.Asin)
+	}
+
+	if len(rq.Rivals) > 0 { // a, b, c =? 'a'   'b'
+		rivalAsins := make([]string, 0, 16)
+
+		for _, rival := range rq.Rivals {
+			rivalAsins = append(rivalAsins, fmt.Sprintf("'%s'", rival))
+		}
+		tx = tx.Where("rival_asin in (?)", strings.Join(rivalAsins, ", "))
+
 	}
 
 	return tx.Unscoped().Delete(&sql_store.Rival{}).Error
